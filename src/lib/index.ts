@@ -3,3 +3,4 @@ export * from './services/get-topics.service';
 export * from './stores/locale.store.svelte';
 export * from './stores/provide-store';
 export * from './components/header/header.svelte';
+export * from './components/translate.svelte';

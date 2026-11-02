@@ -26,6 +26,7 @@ export default defineConfig({
 
 					return `
 					@use 'src/lib/styles/variables' as *;
+					@use 'src/lib/styles/mixins' as *;
 					${content}
 				`;
 				}

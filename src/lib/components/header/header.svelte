@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { TopicItem } from '#lib';
 	import { IconPhoneSnippet } from '#lib/icons/icon-phone.svelte';
+	import Translate from '../translate.svelte';
 
 	type Props = {
 		topMenu: TopicItem[];
@@ -21,6 +22,9 @@
 					{#each topMenu as item (item.id)}
 						<h4>{item.title}</h4>
 					{/each}
+					<h4>
+						<Translate key="branches" />
+					</h4>
 				</div>
 			</div>
 		</div>
@@ -65,6 +69,7 @@
 					display: flex;
 					align-items: center;
 					gap: 20px;
+
 					h4 {
 						opacity: 0.7;
 						transition: 0.21s;
@@ -74,6 +79,11 @@
 						font-weight: 500;
 						font-size: 12px;
 						line-height: 14px;
+
+						&:hover {
+							transform: scale(1.01);
+							opacity: 1;
+						}
 					}
 				}
 			}
