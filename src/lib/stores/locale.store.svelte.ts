@@ -1,4 +1,4 @@
-import { type Locale } from '#lib/i18n/i18n.ts';
+import type { Locale } from '../i18n/i18n';
 import { createStoreContext } from './provide-store';
 
 function createLocaleStore(getInitialLocale: () => Locale) {

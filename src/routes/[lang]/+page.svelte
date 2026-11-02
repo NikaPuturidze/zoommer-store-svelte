@@ -1,9 +1,10 @@
 <script lang="ts">
-	import { localeContext } from '#lib/stores/locale.store.svelte.ts';
+	import Header from '#lib/components/header/header.svelte';
+	import type { PageData } from './$types';
 
-	const localeStore = localeContext.get();
+	const { data }: { data: PageData } = $props();
 </script>
 
 <div>
-	{localeStore.locale}
+	<Header topMenu={data.topics.showInTopMenu} />
 </div>

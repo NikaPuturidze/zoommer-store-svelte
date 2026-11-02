@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { localeContext } from '#lib/stores/locale.store.svelte.ts';
-	import type { Locale } from '#lib/i18n/i18n.ts';
+	import { localeContext, type Locale } from '#lib';
 	import type { LayoutProps } from './$types';
 	import { onMount } from 'svelte';
 
