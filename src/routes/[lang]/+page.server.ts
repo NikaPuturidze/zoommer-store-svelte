@@ -1,10 +1,17 @@
 import { getMegaMenuService, type MegaMenuItem } from '#lib/services';
+import { getContentService, type ContentResponse } from '#lib/services/get-content.ts';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ fetch, parent }) => {
 	const megaMenu = await loadMegaMenu(fetch, parent);
+	const content = await loadContent(fetch, parent);
 	const heights = getMegaMenuHeights();
-	return { megaMenu, heights } as { megaMenu: MegaMenuItem[]; heights: number[] };
+
+	return { megaMenu, content, heights } as {
+		megaMenu: MegaMenuItem[];
+		content: ContentResponse;
+		heights: number[];
+	};
 };
 
 async function loadMegaMenu(
@@ -13,6 +20,14 @@ async function loadMegaMenu(
 ): Promise<MegaMenuItem[]> {
 	await parent();
 	return getMegaMenuService(fetcher);
+}
+
+async function loadContent(
+	fetcher: typeof fetch,
+	parent: () => Promise<unknown>
+): Promise<ContentResponse> {
+	await parent();
+	return getContentService(fetcher);
 }
 
 function getMegaMenuHeights(): number[] {
