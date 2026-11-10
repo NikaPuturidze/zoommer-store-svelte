@@ -1,7 +1,8 @@
 <script lang="ts">
 	import type { TopicItem } from '#lib';
-	import { IconPhoneSnippet } from '#lib/icons/icon-phone.svelte';
+	import { IconPhone } from '#lib/icons/index.ts';
 	import Translate from '../translate.svelte';
+	import LanguageSwitcher from './language-switcher.svelte';
 
 	type Props = {
 		topMenu: TopicItem[];
@@ -11,11 +12,11 @@
 </script>
 
 <header>
-	<div>
+	<div class="header">
 		<div>
 			<div>
 				<div class="phone">
-					{@render IconPhoneSnippet()}
+					<IconPhone />
 					<h4>*7007</h4>
 				</div>
 				<div class="items">
@@ -25,6 +26,7 @@
 					<h4>
 						<Translate key="branches" />
 					</h4>
+					<LanguageSwitcher />
 				</div>
 			</div>
 		</div>
@@ -32,18 +34,20 @@
 </header>
 
 <style lang="scss">
-	header > div {
+	header {
+		height: $header-height;
+	}
+
+	.header {
 		position: relative;
 		z-index: 12;
 		margin-bottom: 0px;
 		background-color: $orange-main;
 		padding: 10px 0px;
+		height: $header-height;
 
 		> div {
-			margin: 0px auto;
-			padding: 0px 15px;
-			width: 100%;
-			max-width: 1200px;
+			@include container;
 
 			> div {
 				display: flex;

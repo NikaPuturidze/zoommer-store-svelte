@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { TranslationKey } from '#lib';
-	import { ka } from '#lib/i18n/locales/ka.ts';
+	import { localeContext, type TranslationKey } from '#lib';
 
 	const { key }: { key: TranslationKey } = $props();
+	const { t } = localeContext.get();
 </script>
 
-{ka[key]}
+{t(key)}

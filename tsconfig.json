@@ -2,7 +2,7 @@
 	"extends": "$app/tsconfig",
 	"compilerOptions": {
 		"strict": true,
-		"types": ["$app/types", "node"]
+		"types": ["$app/types", "node", "@sveltejs/kit"]
 	},
 	"include": ["src", "*.config.*"],
 	"exclude": ["node_modules", "src/service-worker"]

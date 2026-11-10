@@ -1,5 +1,6 @@
 import { error } from '@sveltejs/kit';
 import type { RequestHandler } from '@sveltejs/kit';
+import { BASE_LOCALE } from '#lib/i18n/i18n.ts';
 
 const proxy: RequestHandler = async ({ params, url, request, fetch }) => {
 	try {
@@ -8,6 +9,9 @@ const proxy: RequestHandler = async ({ params, url, request, fetch }) => {
 		targetUrl.search = url.search;
 
 		const response = await fetch(targetUrl, {
+			headers: {
+				'accept-language': request.headers.get('accept-language') ?? BASE_LOCALE
+			},
 			method: request.method,
 			body:
 				request.method === 'GET' || request.method === 'HEAD' || request.body === null

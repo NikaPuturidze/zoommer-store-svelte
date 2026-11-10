@@ -1,13 +1,23 @@
-import { BASE_LOCALE, locales, type Locale } from '#lib';
+import { BASE_LOCALE, getTopicsService, locales, type Locale, type TopicsResponse } from '#lib';
 import { redirect } from '@sveltejs/kit';
 import type { LayoutServerLoad } from './$types';
 
-export const load: LayoutServerLoad = async ({ params }) => {
-	if (!Object.hasOwn(locales, params.lang)) {
+export const load: LayoutServerLoad = async ({ params, fetch, parent }) => {
+	const locale = resolveLocale(params.lang);
+	const topics = await loadLayoutData(fetch, parent);
+
+	return { locale, topics } as { locale: Locale; topics: TopicsResponse };
+};
+
+function resolveLocale(lang: string): Locale {
+	if (!Object.hasOwn(locales, lang)) {
 		redirect(307, BASE_LOCALE);
 	}
 
-	const locale = params.lang && Object.hasOwn(locales, params.lang) ? params.lang : BASE_LOCALE;
+	return lang as Locale;
+}
 
-	return { locale } as { locale: Locale };
-};
+async function loadLayoutData(fetcher: typeof fetch, parent: () => Promise<unknown>) {
+	await parent();
+	return getTopicsService(fetcher);
+}

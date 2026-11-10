@@ -1,3 +1,5 @@
+@use 'variables' as *;
+
 @mixin regular {
 	font-style: normal;
 	font-weight: 400;
@@ -14,4 +16,98 @@
 	font-style: normal;
 	font-weight: 600;
 	font-family: 'FiraGO', Arial, sans-serif;
+}
+
+@mixin container {
+	margin: 0px auto;
+	padding: 0px 15px;
+	width: 100%;
+	max-width: 1200px;
+}
+
+@mixin response-to-mobile {
+	@media (max-width: $mobile-breakpoint) {
+		@content;
+	}
+}
+
+@mixin nprogress {
+	:global {
+		#nprogress .spinner,
+		#nprogress .spinner-icon,
+		.nprogress-custom-parent #nprogress .spinner {
+			display: none;
+		}
+
+		#nprogress {
+			pointer-events: none;
+		}
+		#nprogress .bar {
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 9999;
+			background: $orange-main;
+			width: 100%;
+			height: 3px;
+		}
+		#nprogress .peg {
+			display: block;
+			position: absolute;
+			right: 0px;
+			-webkit-transform: rotate(3deg) translate(0px, -4px);
+			-ms-transform: rotate(3deg) translate(0px, -4px);
+			transform: rotate(3deg) translate(0px, -4px);
+			opacity: 1;
+			box-shadow:
+				0 0 10px $orange-main,
+				0 0 5px $orange-main;
+			width: 100px;
+			height: 100%;
+		}
+		#nprogress .spinner {
+			display: block;
+			position: fixed;
+			top: 15px;
+			right: 15px;
+			z-index: 1031;
+		}
+		#nprogress .spinner-icon {
+			-webkit-animation: nprogresss-spinner 400ms linear infinite;
+			animation: nprogress-spinner 400ms linear infinite;
+			box-sizing: border-box;
+			border: solid 2px transparent;
+			border-top-color: $orange-main;
+			border-left-color: $orange-main;
+			border-radius: 50%;
+			width: 18px;
+			height: 18px;
+		}
+		.nprogress-custom-parent {
+			position: relative;
+			position: relative;
+			overflow: hidden;
+		}
+		.nprogress-custom-parent #nprogress .spinner,
+		.nprogress-custom-parent #nprogress .bar {
+			position: absolute;
+		}
+
+		@-webkit-keyframes nprogress-spinner {
+			0% {
+				-webkit-transform: rotate(0deg);
+			}
+			100% {
+				-webkit-transform: rotate(360deg);
+			}
+		}
+		@keyframes nprogress-spinner {
+			0% {
+				transform: rotate(0deg);
+			}
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+	}
 }

@@ -17,6 +17,8 @@
 		"precommit": "lint-staged && npm run check"
 	},
 	"dependencies": {
+		"@types/nprogress": "^0.2.3",
+		"nprogress": "^0.2.0",
 		"set-cookie-parser": "^3.2.2"
 	},
 	"devDependencies": {
@@ -49,6 +51,8 @@
 	},
 	"imports": {
 		"#lib": "./src/lib/index.js",
+		"#lib/app": "./src/lib/app/index.ts",
+		"#lib/components": "./src/lib/components/index.ts",
 		"#lib/*": "./src/lib/*"
 	},
 	"lint-staged": {

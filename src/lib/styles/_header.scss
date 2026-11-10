@@ -1,0 +1,136 @@
+@use './variables' as *;
+@use './mixins' as *;
+
+header {
+	height: $header-total-height;
+}
+
+header > .header {
+	position: relative;
+	z-index: 12;
+	margin-bottom: 0;
+	background-color: $orange-main;
+	padding: 10px 0;
+	height: $header-height;
+
+	> div {
+		@include container;
+
+		> div {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			.phone {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				cursor: pointer;
+
+				h4 {
+					margin: 0;
+					color: $white-main;
+					font-weight: 500;
+					font-size: 12px;
+					line-height: 14px;
+				}
+			}
+
+			.items {
+				display: flex;
+				align-items: center;
+				gap: 20px;
+
+				h4 {
+					opacity: 0.7;
+					transition: 0.21s;
+					cursor: pointer;
+					margin: 0;
+					color: $white-main;
+					font-weight: 500;
+					font-size: 12px;
+					line-height: 14px;
+
+					&:hover {
+						transform: scale(1.01);
+						opacity: 1;
+					}
+				}
+			}
+		}
+	}
+}
+
+.navbar {
+	position: relative;
+	top: auto;
+	z-index: 11;
+	backdrop-filter: blur(10px);
+	background-color: rgba(237, 235, 235, 0.74);
+	width: auto;
+	height: $navbar-height;
+
+	> div {
+		@include container;
+
+		> div {
+			display: flex;
+			position: relative;
+			align-items: center;
+			gap: 100px;
+			padding: 15px 0;
+			width: 100%;
+			height: $navbar-height;
+
+			a svg {
+				cursor: pointer;
+				width: 151px;
+				height: 40px;
+			}
+
+			.items {
+				display: flex;
+				gap: 20px;
+
+				h4 {
+					color: $white-main;
+					font-weight: 500;
+					font-size: 14px;
+					line-height: 17px;
+				}
+
+				.search-input {
+					width: 400px;
+				}
+
+				.nav-button {
+					background-color: $orange-main;
+					width: 130px;
+					height: 40px;
+					color: $white-main;
+				}
+			}
+
+			.actions {
+				display: flex;
+				gap: 20px;
+
+				h4 {
+					color: $black-main;
+				}
+
+				.side-button {
+					opacity: 0.8;
+					background-color: $white-main;
+					width: 130px;
+				}
+
+				.discount {
+					background-color: $orange-main;
+					width: 48px;
+					color: $white-main;
+				}
+			}
+		}
+	}
+}

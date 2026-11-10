@@ -1,4 +1,5 @@
 import type { Handle, HandleFetch } from '@sveltejs/kit/hooks';
+import { BASE_LOCALE } from '#lib/i18n/i18n.ts';
 import setCookieParser from 'set-cookie-parser';
 
 const ZOOMMER_ORIGIN = 'https://zoommer.ge';
@@ -34,6 +35,17 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 export const handleFetch: HandleFetch = async ({ event, request, fetch }) => {
 	const target = new URL(request.url);
+	const isProxyRequest =
+		target.origin === event.url.origin && target.pathname.startsWith('/api/zoommer/');
+
+	if (isProxyRequest || target.origin === ZOOMMER_ORIGIN) {
+		if (!request.headers.has('accept-language')) {
+			request.headers.set(
+				'accept-language',
+				event.params.lang ?? event.request.headers.get('accept-language') ?? BASE_LOCALE
+			);
+		}
+	}
 
 	if (target.origin === ZOOMMER_ORIGIN) {
 		request.headers.set('origin', ZOOMMER_ORIGIN);

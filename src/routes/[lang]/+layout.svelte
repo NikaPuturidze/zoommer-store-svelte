@@ -1,15 +1,27 @@
 <script lang="ts">
-	import { localeContext, type Locale } from '#lib';
 	import type { LayoutProps } from './$types';
-	import { onMount } from 'svelte';
+	import { localeContext } from '#lib';
+	import { NavigationProgress, ScrollRestoration } from '#lib/app';
+	import { Header, Navbar, Scrollbar } from '#lib/components';
+	import { appContext } from '#lib/stores/app.store.svelte.ts';
 
 	const { data, children }: LayoutProps = $props();
 
-	const localeStore = localeContext.provide(() => data.locale as Locale);
-
-	onMount(() => {
-		localeStore.locale = data.locale;
-	});
+	localeContext.provide(() => data.locale);
+	const appStore = appContext.provide();
 </script>
 
-{@render children()}
+<div>
+	<ScrollRestoration />
+	<NavigationProgress />
+
+	<Header topMenu={data.topics.showInTopMenu} />
+	<Navbar />
+
+	<main>
+		{@render children()}
+	</main>
+	{#if !appStore.isMobile}
+		<Scrollbar />
+	{/if}
+</div>

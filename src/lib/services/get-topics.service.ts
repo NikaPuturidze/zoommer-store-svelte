@@ -20,5 +20,5 @@ export function handleResponse<T>(response: Response): Promise<T> {
 }
 
 export function getTopicsService(fetcher: typeof fetch): Promise<TopicsResponse> {
-	return fetcher('api/zoommer/Topics/get-topics').then(handleResponse<TopicsResponse>);
+	return fetcher('/api/zoommer/Topics/get-topics').then(handleResponse<TopicsResponse>);
 }
