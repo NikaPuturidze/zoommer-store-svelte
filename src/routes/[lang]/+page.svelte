@@ -59,25 +59,30 @@
 						</div>
 					</div>
 					<div class="categories-catalog">
-						<div class="catalog-items">
-							{#if activeCategoryId != null}
-								{#each data.megaMenu[activeCategoryId].childItems as child, index (index)}
-									<div class="item">
-										<a href={resolve(getUrl(child.url))}>
-											<h4>{child.name}</h4>
-										</a>
-										<div>
-											{#each child.childItems ?? [] as subChild (subChild.id)}
-												<a href={resolve(getUrl(subChild.url))}>
-													<h4>{subChild.name}</h4>
-												</a>
-											{/each}
+						{#key activeCategoryId}
+							<div class="catalog-items">
+								{#if activeCategoryId != null}
+									{#each data.megaMenu[activeCategoryId].childItems as child, index (index)}
+										<div class="item">
+											<a href={resolve(getUrl(child.url))}>
+												<h4>{child.name}</h4>
+											</a>
+											<div>
+												{#each child.childItems ?? [] as subChild (subChild.id)}
+													<a href={resolve(getUrl(subChild.url))}>
+														<h4>{subChild.name}</h4>
+													</a>
+												{/each}
+											</div>
 										</div>
-									</div>
-								{/each}
-								<img alt="" src={data.megaMenu[activeCategoryId].imageUrl} />
-							{/if}
-						</div>
+									{/each}
+									<img
+										alt={data.megaMenu[activeCategoryId].imageId.toString()}
+										src={data.megaMenu[activeCategoryId].imageUrl}
+									/>
+								{/if}
+							</div>
+						{/key}
 					</div>
 				</div>
 			</div>
@@ -209,11 +214,21 @@
 							height: 100%;
 							overflow: hidden;
 
+							@keyframes fade-in {
+								from {
+									opacity: 0;
+								}
+								to {
+									opacity: 1;
+								}
+							}
+
 							.catalog-items {
 								display: flex;
 								flex-flow: column wrap;
 								align-content: flex-start;
 								gap: 30px;
+								animation: fade-in 200ms ease;
 								margin: 20px;
 								height: var(--menu-height);
 
@@ -221,13 +236,13 @@
 									position: absolute;
 									right: 0px;
 									bottom: 0px;
+									opacity: inherit;
 									border-radius: 12px;
 									max-width: 200px;
 									max-height: 220px;
 								}
 
 								.item {
-									opacity: 1;
 									max-width: 25%;
 
 									> a {
@@ -248,7 +263,6 @@
 
 										> a {
 											h4 {
-												opacity: 0.8;
 												cursor: pointer;
 												color: $black-08;
 												font-weight: 500;
