@@ -53,6 +53,7 @@
 		"#lib": "./src/lib/index.js",
 		"#lib/app": "./src/lib/app/index.ts",
 		"#lib/components": "./src/lib/components/index.ts",
+		"#lib/services": "./src/lib/services/index.ts",
 		"#lib/*": "./src/lib/*"
 	},
 	"lint-staged": {

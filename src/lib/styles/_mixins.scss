@@ -25,6 +25,11 @@
 	max-width: 1200px;
 }
 
+@mixin page {
+	flex-grow: 1;
+	padding: 30px 0px 60px;
+}
+
 @mixin response-to-mobile {
 	@media (max-width: $mobile-breakpoint) {
 		@content;

@@ -1,3 +1,5 @@
+import { handleResponse } from '.';
+
 export interface TopicsResponse {
 	firstFooter: TopicItem[];
 	secondFooter: TopicItem[];
@@ -12,11 +14,6 @@ export interface TopicItem {
 	orderNo: number;
 	title: string;
 	urlName: string;
-}
-
-export function handleResponse<T>(response: Response): Promise<T> {
-	if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
-	return response.json() as Promise<T>;
 }
 
 export function getTopicsService(fetcher: typeof fetch): Promise<TopicsResponse> {

@@ -17,7 +17,10 @@ function resolveLocale(lang: string): Locale {
 	return lang as Locale;
 }
 
-async function loadLayoutData(fetcher: typeof fetch, parent: () => Promise<unknown>) {
+async function loadLayoutData(
+	fetcher: typeof fetch,
+	parent: () => Promise<unknown>
+): Promise<TopicsResponse> {
 	await parent();
 	return getTopicsService(fetcher);
 }
