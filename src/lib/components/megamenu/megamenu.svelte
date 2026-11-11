@@ -37,7 +37,7 @@
 		height: 340px;
 
 		&.large {
-			width: min(895px, 100%);
+			width: 895px;
 		}
 
 		> a {
