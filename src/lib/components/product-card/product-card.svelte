@@ -48,9 +48,9 @@
 			<IconCompare />
 		</Button>
 		<Button>
-			{#if isInCart}
+			{#if !isInCart}
 				<h4>
-					<Translate key="in_cart" />
+					<Translate key="add" />
 				</h4>
 			{:else}
 				<IconCartSecond />

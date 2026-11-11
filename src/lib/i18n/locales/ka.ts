@@ -4,7 +4,7 @@ export const ka = {
 	search: 'ძიება',
 	cart: 'კალათა',
 	log_in: 'შესვლა',
-	per_month: 'თვეში: {amount} - დან',
+	per_month: 'თვეში: {amount} -დან',
 	in_cart: 'კალათაშია',
 	add: 'დამატება'
 } as const;
