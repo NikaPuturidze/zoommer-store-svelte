@@ -104,6 +104,7 @@
 
 		.categories-container {
 			position: relative;
+			z-index: 2;
 			transition:
 				height var(--transition-duration) ease,
 				border-radius 0.3s ease;
