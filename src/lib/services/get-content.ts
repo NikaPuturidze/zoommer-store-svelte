@@ -4,6 +4,11 @@ export interface ContentResponse {
 	section: Section[];
 }
 
+export enum SectionType {
+	First = 1,
+	Fifth = 5
+}
+
 export interface Section {
 	activeOrders: unknown[] | null;
 	bannerFinishDate: Date | null;
@@ -22,7 +27,7 @@ export interface Section {
 	promotionFinishDate: null;
 	promotionProducts: null;
 	route: null | string;
-	sectionType: number;
+	sectionType: SectionType;
 	title: null | string;
 }
 

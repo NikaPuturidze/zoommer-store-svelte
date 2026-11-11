@@ -4,7 +4,11 @@
 	import { appContext } from '#lib/stores/app.store.svelte.ts';
 	import type { Snippet } from 'svelte';
 
-	const { children, gap = 20 }: { children: Snippet; gap?: number } = $props();
+	const {
+		children,
+		gap = 20,
+		auto = false
+	}: { children: Snippet; gap?: number; auto?: boolean } = $props();
 
 	let swiper: HTMLDivElement;
 	let currentIndex = $state(0);
@@ -14,14 +18,17 @@
 
 	function scrollTo(index: number) {
 		const slide = swiper.querySelector<HTMLElement>(`:scope > [data-index="${index}"]`);
-		if (!slide) return false;
+		if (!slide) {
+			console.warn('Last slide or invalid selector', slide);
+			return false;
+		}
 		swiper.scrollTo({ left: slide.offsetLeft, behavior: 'smooth' });
 		currentIndex = index;
 		return true;
 	}
 
 	$effect(() => {
-		if (appStore.isMobile) return;
+		if (appStore.isMobile || !auto) return;
 
 		const interval = setInterval(() => {
 			if (overSwiper) return;

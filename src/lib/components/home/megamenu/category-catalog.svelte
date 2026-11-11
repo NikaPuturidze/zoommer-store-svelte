@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { getUrl } from '#lib/helpers/get-url.ts';
 	import IconArrowDown from '#lib/icons/icon-arrow-down.svelte';
 	import type { MegaMenuItem } from '#lib/services/get-mega-menu.ts';
 	import { localeContext } from '#lib/stores/locale.store.svelte.ts';
@@ -11,7 +10,7 @@
 		wrapperWidth
 	}: { categories: MegaMenuItem[]; heights: number[]; wrapperWidth: number } = $props();
 
-	const localeStore = localeContext.get();
+	const { getUrl } = localeContext.get();
 
 	let activeCategoryId = $state<number | null>(null);
 	let isActive = $derived(activeCategoryId !== null);
@@ -34,7 +33,7 @@
 				<div class="categories-items">
 					{#each categories as parent, index (index)}
 						<div class="items" onmouseenter={() => (activeCategoryId = index)} role="presentation">
-							<a href={resolve(getUrl(parent.url, localeStore.locale))}>
+							<a href={resolve(getUrl(parent.url))}>
 								<div class="item-container">
 									<img
 										alt=""
@@ -60,12 +59,12 @@
 					{#if activeCategoryId != null}
 						{#each categories[activeCategoryId].childItems as child, index (index)}
 							<div class="item">
-								<a href={resolve(getUrl(child.url, localeStore.locale))}>
+								<a href={resolve(getUrl(child.url))}>
 									<h4>{child.name}</h4>
 								</a>
 								<div>
 									{#each child.childItems ?? [] as subChild (subChild.id)}
-										<a href={resolve(getUrl(subChild.url, localeStore.locale))}>
+										<a href={resolve(getUrl(subChild.url))}>
 											<h4>{subChild.name}</h4>
 										</a>
 									{/each}
@@ -182,7 +181,7 @@
 				left: var(--category-width);
 				z-index: 3;
 				box-shadow: rgba(0, 0, 0, 0.08) 4px 0 8px 1px;
-				border-radius: 8px;
+				border-radius: 8px 0 8px 8px;
 				background: var(--white-main);
 				width: calc(100% - var(--category-width));
 				height: 100%;
