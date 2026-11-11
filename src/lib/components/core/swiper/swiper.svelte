@@ -7,6 +7,7 @@
 
 	let swiper: HTMLDivElement;
 	let currentIndex = $state(0);
+	let overSwiper = $state(false);
 
 	function scrollTo(index: number) {
 		const slide = swiper.querySelector<HTMLElement>(`:scope > [data-index="${index}"]`);
@@ -18,14 +19,23 @@
 
 	onMount(() => {
 		const interval = setInterval(() => {
-			if (!scrollTo(currentIndex + 1)) scrollTo(0);
+			if (overSwiper) return;
+
+			if (!scrollTo(currentIndex + 1)) {
+				scrollTo(0);
+			}
 		}, 4000);
 
 		return () => clearInterval(interval);
 	});
 </script>
 
-<div class="track">
+<div
+	class="track"
+	onmouseenter={() => (overSwiper = true)}
+	onmouseleave={() => (overSwiper = false)}
+	role="presentation"
+>
 	<div class="swiper">
 		<div bind:this={swiper} style:--banner-gap={`${gap}px`} class="swiper-wrapper">
 			{@render children()}
