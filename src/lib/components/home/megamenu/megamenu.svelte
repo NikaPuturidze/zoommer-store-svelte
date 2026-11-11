@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { optimizedImage } from '#lib/helpers/optimized-image.ts';
 	import Container from '#lib/components/core/button/container.svelte';
 	import type { Section } from '#lib/services';
 	import type { MegaMenuItem } from '#lib/services/get-mega-menu.ts';
@@ -28,9 +29,17 @@
 				<div class="banner-item" class:large={banner.largeBanner} data-index={index}>
 					<a href={resolve(getUrl(banner.route))}>
 						{#if appStore.isMobile}
-							<img alt={banner.title} src={banner.mobileImageUrl} />
+							<img
+								alt={banner.title}
+								{...optimizedImage(banner.mobileImageUrl, 291)}
+								decoding="async"
+							/>
 						{:else}
-							<img alt={banner.title} src={banner.webImageUrl} />
+							<img
+								alt={banner.title}
+								{...optimizedImage(banner.webImageUrl, banner.largeBanner ? 895 : 220)}
+								decoding="async"
+							/>
 						{/if}
 					</a>
 				</div>
@@ -77,6 +86,7 @@
 				border-radius: inherit;
 				width: 100%;
 				height: inherit;
+				object-fit: cover;
 			}
 		}
 	}

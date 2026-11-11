@@ -1,34 +1,27 @@
 <script lang="ts">
+	import SectionDefault from './section-default.svelte';
+	import SectionFourth from './section-fourth.svelte';
+	import SectionThird from './section-third.svelte';
 	import Container from '#lib/components/core/button/container.svelte';
-	import Swiper from '#lib/components/core/swiper/swiper.svelte';
-	import ProductCard from '#lib/components/product-card/product-card.svelte';
 	import { SectionType, type Section } from '#lib/services';
-	import { localeContext } from '#lib/stores/locale.store.svelte.ts';
-	import { resolve } from '$app/paths';
 
 	const { sections }: { sections: Section[] } = $props();
-	const { getUrl } = localeContext.get();
 </script>
 
 <Container>
 	<div class="sections-wrapper">
 		<div class="sections">
-			{#each sections as section, index (index)}
+			{#each sections.slice(1) as section (section.id)}
 				{@const isDefault =
 					section.sectionType == SectionType.First || section.sectionType == SectionType.Fifth}
-				{#if isDefault}
-					<div class:banner-default={isDefault}>
-						<div>
-							<a href={resolve(getUrl(section.route ?? ''))}>
-								<h2>{section.title}</h2>
-							</a>
-						</div>
-						<Swiper gap={35}>
-							{#each section.products as product, index (index)}
-								<ProductCard data-index={index} {product} />
-							{/each}
-						</Swiper>
-					</div>
+				{#if isDefault || section.sectionType == SectionType.Third || section.sectionType == SectionType.Fourth}
+					{#if isDefault}
+						<SectionDefault {section} />
+					{:else if section.sectionType == SectionType.Third}
+						<SectionThird {section} />
+					{:else if section.sectionType == SectionType.Fourth}
+						<SectionFourth {section} />
+					{/if}
 				{/if}
 			{/each}
 		</div>
@@ -46,28 +39,9 @@
 			display: flex;
 			flex-wrap: wrap;
 			justify-content: space-between;
-			gap: 25px;
+			gap: 60px;
 			margin-top: 30px;
 			width: 100%;
-
-			.banner-default {
-				width: 100%;
-
-				> div {
-					display: flex;
-					justify-content: space-between;
-					margin-bottom: 30px;
-					width: 100%;
-
-					h2 {
-						opacity: 0.8;
-						color: var(--black-main);
-						font-weight: 600;
-						font-size: 16px;
-						line-height: 20px;
-					}
-				}
-			}
 		}
 	}
 </style>

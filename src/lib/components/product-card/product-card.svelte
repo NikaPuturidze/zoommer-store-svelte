@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { optimizedImage } from '#lib/helpers/optimized-image.ts';
 	import IconCartSecond from '#lib/icons/icon-cart-second.svelte';
 	import IconCompare from '#lib/icons/icon-compare.svelte';
 	import type { Product } from '#lib/services';
@@ -18,7 +19,14 @@
 
 <div class="card" {...rest}>
 	<a href={resolve(getUrl(product.route))}>
-		<img alt={product.name} src={product.imageUrl} />
+		<img
+			alt={product.name}
+			{...optimizedImage(product.imageUrl, 160)}
+			decoding="async"
+			height="160"
+			loading="lazy"
+			width="160"
+		/>
 		{#if product.labelText}
 			<div style:color={product.labelText}>{product.labelText}</div>
 		{/if}
@@ -49,11 +57,11 @@
 		</Button>
 		<Button>
 			{#if !isInCart}
+				<IconCartSecond />
 				<h4>
 					<Translate key="add" />
 				</h4>
 			{:else}
-				<IconCartSecond />
 				<h4>
 					<Translate key="in_cart" />
 				</h4>

@@ -6,6 +6,8 @@ export interface ContentResponse {
 
 export enum SectionType {
 	First = 1,
+	Third = 3,
+	Fourth = 4,
 	Fifth = 5
 }
 

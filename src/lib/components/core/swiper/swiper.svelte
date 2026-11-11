@@ -7,8 +7,9 @@
 	const {
 		children,
 		gap = 20,
-		auto = false
-	}: { children: Snippet; gap?: number; auto?: boolean } = $props();
+		auto = false,
+		navigation = true
+	}: { children: Snippet; gap?: number; auto?: boolean; navigation?: boolean } = $props();
 
 	let swiper: HTMLDivElement;
 	let currentIndex = $state(0);
@@ -28,7 +29,7 @@
 	}
 
 	$effect(() => {
-		if (appStore.isMobile || !auto) return;
+		if (appStore.isMobile || !auto || !navigation) return;
 
 		const interval = setInterval(() => {
 			if (overSwiper) return;
@@ -52,14 +53,16 @@
 		<div bind:this={swiper} style:--banner-gap={`${gap}px`} class="swiper-wrapper">
 			{@render children()}
 		</div>
-		<div class="controls">
-			<span onclick={() => scrollTo(currentIndex - 1)} role="presentation">
-				<IconSliderLeft />
-			</span>
-			<span onclick={() => scrollTo(currentIndex + 1)} role="presentation">
-				<IconSliderRight />
-			</span>
-		</div>
+		{#if navigation}
+			<div class="controls">
+				<span onclick={() => scrollTo(currentIndex - 1)} role="presentation">
+					<IconSliderLeft />
+				</span>
+				<span onclick={() => scrollTo(currentIndex + 1)} role="presentation">
+					<IconSliderRight />
+				</span>
+			</div>
+		{/if}
 	</div>
 </div>
 
