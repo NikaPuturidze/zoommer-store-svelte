@@ -36,6 +36,10 @@
 				grid-template-columns: 246px minmax(0, 1fr);
 				column-gap: 30px;
 				width: 100%;
+
+				@include response-to-mobile {
+					display: block;
+				}
 			}
 		}
 	}

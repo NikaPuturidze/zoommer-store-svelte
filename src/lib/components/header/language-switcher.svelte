@@ -32,10 +32,18 @@
 		gap: 10px;
 		filter: drop-shadow(rgba(0, 0, 0, 0.1) 0px 2px 10px);
 		border-radius: 12px;
-		background-color: $white-main;
+		background-color: var(--white-main);
 		padding: 7px 10px;
 		min-width: 48px;
 		min-height: 38px;
+
+		@include response-to-mobile {
+			filter: none;
+			border: 1px solid rgba(0, 0, 0, 0.075);
+			border-radius: 6px;
+			background-color: transparent;
+			padding: 6px 7px;
+		}
 
 		.flag {
 			display: flex;
@@ -44,6 +52,11 @@
 			cursor: pointer;
 			width: 100%;
 			height: 100%;
+
+			@include response-to-mobile {
+				width: 32px;
+				height: 17.5px;
+			}
 
 			> img {
 				display: none;
@@ -55,6 +68,10 @@
 
 				&.active {
 					display: flex;
+				}
+
+				@include response-to-mobile {
+					box-shadow: none;
 				}
 			}
 		}
@@ -71,7 +88,7 @@
 			transition: all 0.1s ease;
 			margin-top: 10px;
 			border-radius: 12px;
-			background: $white-main;
+			background: var(--white-main);
 			width: 100%;
 			overflow: hidden;
 			pointer-events: none;
@@ -91,7 +108,7 @@
 				text-align: center;
 
 				&:hover {
-					background: $white-300;
+					background: var(--white-300);
 				}
 			}
 		}

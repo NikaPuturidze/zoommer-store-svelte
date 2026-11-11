@@ -4,12 +4,13 @@
 	import IconCart from '#lib/icons/icon-cart.svelte';
 	import IconMain from '#lib/icons/icon-main.svelte';
 	import IconDots from '#lib/icons/icon-dots.svelte';
-	import { IconMainSearchSnippet } from '#lib/icons/icon-main-search.svelte';
+	import IconMainSearch, { IconMainSearchSnippet } from '#lib/icons/icon-main-search.svelte';
 	import { resolve } from '$app/paths';
 	import Button from '../core/button/button.svelte';
 	import Input from '../core/input/input.svelte';
 	import Translate from '../translate.svelte';
 	import { appContext } from '#lib/stores/app.store.svelte.ts';
+	import LanguageSwitcher from '../header/language-switcher.svelte';
 
 	let search = $state('');
 	const { t } = localeContext.get();
@@ -23,7 +24,8 @@
 				<a aria-label="Zoommer" href={resolve('/')}>
 					<IconMain />
 				</a>
-				<div>
+
+				<div class="desktop">
 					<div class="items">
 						<Button class="nav-button">
 							<IconDots />
@@ -49,6 +51,16 @@
 						<Button class="discount">%</Button>
 					</div>
 				</div>
+
+				<div class="mobile">
+					<Button class="side-button" press={false}>
+						<IconMainSearch />
+					</Button>
+					<Button class="side-button" press={false}>
+						<IconCart />
+					</Button>
+					<LanguageSwitcher />
+				</div>
 			</div>
 		</div>
 	</nav>
@@ -65,7 +77,7 @@
 	}
 
 	.navbar-slot {
-		height: $navbar-height;
+		height: var(--navbar-height);
 	}
 
 	.navbar {
@@ -74,7 +86,7 @@
 		backdrop-filter: blur(10px);
 		background-color: rgba(237, 235, 235, 0.74);
 		width: auto;
-		height: $navbar-height;
+		height: var(--navbar-height);
 
 		&.fixed {
 			position: fixed;
@@ -92,7 +104,12 @@
 				align-items: center;
 				gap: 100px;
 				padding: 15px 0;
-				height: $navbar-height;
+				height: var(--navbar-height);
+
+				@include response-to-mobile {
+					justify-content: space-between;
+					gap: 0;
+				}
 
 				a {
 					:global(svg) {
@@ -100,63 +117,87 @@
 						width: 151px;
 						height: 40px;
 					}
-				}
 
-				> div {
-					display: flex;
-					flex: 1;
-					justify-content: space-between;
-					gap: 21px;
-
-					.items {
-						display: flex;
-						flex: 1;
-						gap: 20px;
-
-						h4 {
-							color: $white-main;
-							font-weight: 500;
-							font-size: 14px;
-							line-height: 17px;
-						}
-
-						> :global(.search-input) {
-							width: 100%;
-							max-width: 400px;
-						}
-
-						> :global(.nav-button) {
-							background-color: $orange-main;
-							width: 130px;
-							height: 40px;
-							color: $white-main;
+					@include response-to-mobile {
+						:global(svg) {
+							width: 107px;
+							height: 28px;
 						}
 					}
+				}
 
-					.actions {
+				.desktop {
+					display: none;
+
+					@include response-to-desktop {
 						display: flex;
-						gap: 20px;
+						flex: 1;
+						justify-content: space-between;
+						gap: 21px;
 
-						h4 {
-							color: $black-main;
-							font-weight: 500;
-							font-size: 14px;
-							line-height: 17px;
+						.items {
+							display: flex;
+							flex: 1;
+							gap: 20px;
+
+							h4 {
+								color: var(--white-main);
+								font-weight: 500;
+								font-size: 14px;
+								line-height: 17px;
+							}
+
+							> :global(.search-input) {
+								width: 100%;
+								max-width: 400px;
+							}
+
+							> :global(.nav-button) {
+								background-color: var(--orange-main);
+								width: 130px;
+								height: 40px;
+								color: var(--white-main);
+							}
 						}
 
-						> :global(.side-button) {
-							opacity: 0.8;
-							background-color: $white-main;
-							width: 130px;
-						}
+						.actions {
+							display: flex;
+							gap: 20px;
 
-						> :global(.discount) {
-							background-color: $orange-main;
-							width: 48px;
-							color: $white-main;
-							font-weight: 500;
-							font-size: 20px;
-							line-height: 24px;
+							h4 {
+								color: var(--black-main);
+								font-weight: 500;
+								font-size: 14px;
+								line-height: 17px;
+							}
+
+							> :global(.side-button) {
+								opacity: 0.8;
+								background-color: var(--white-main);
+								width: 130px;
+							}
+
+							> :global(.discount) {
+								background-color: var(--orange-main);
+								width: 48px;
+								color: var(--white-main);
+								font-weight: 500;
+								font-size: 20px;
+								line-height: 24px;
+							}
+						}
+					}
+				}
+
+				.mobile {
+					display: none;
+					align-items: center;
+
+					@include response-to-mobile {
+						display: flex;
+
+						:global(path) {
+							stroke: var(--black-main);
 						}
 					}
 				}

@@ -1,5 +1,3 @@
-@use 'variables' as *;
-
 @mixin regular {
 	font-style: normal;
 	font-weight: 400;
@@ -28,10 +26,20 @@
 @mixin page {
 	flex-grow: 1;
 	padding: 30px 0px 60px;
+
+	@include response-to-mobile {
+		padding-top: 14px;
+	}
 }
 
 @mixin response-to-mobile {
-	@media (max-width: $mobile-breakpoint) {
+	@media (max-width: 1023px) {
+		@content;
+	}
+}
+
+@mixin response-to-desktop {
+	@media (min-width: 1024px) {
 		@content;
 	}
 }
@@ -52,7 +60,7 @@
 			top: 0;
 			left: 0;
 			z-index: 9999;
-			background: $orange-main;
+			background: var(--orange-main);
 			width: 100%;
 			height: 3px;
 		}
@@ -65,8 +73,8 @@
 			transform: rotate(3deg) translate(0px, -4px);
 			opacity: 1;
 			box-shadow:
-				0 0 10px $orange-main,
-				0 0 5px $orange-main;
+				0 0 10px var(--orange-main),
+				0 0 5px var(--orange-main);
 			width: 100px;
 			height: 100%;
 		}
@@ -82,8 +90,8 @@
 			animation: nprogress-spinner 400ms linear infinite;
 			box-sizing: border-box;
 			border: solid 2px transparent;
-			border-top-color: $orange-main;
-			border-left-color: $orange-main;
+			border-top-color: var(--orange-main);
+			border-left-color: var(--orange-main);
 			border-radius: 50%;
 			width: 18px;
 			height: 18px;

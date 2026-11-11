@@ -45,12 +45,12 @@
 	@include nprogress();
 
 	:global(html.nprogress-white #nprogress .bar) {
-		background-color: $white-main;
+		background-color: var(--white-main);
 	}
 
 	:global(html.nprogress-white #nprogress .peg) {
 		box-shadow:
-			0 0 10px $white-main,
-			0 0 5px $white-main;
+			0 0 10px var(--white-main),
+			0 0 5px var(--white-main);
 	}
 </style>

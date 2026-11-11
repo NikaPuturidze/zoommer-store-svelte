@@ -5,12 +5,13 @@
 
 	type Props = HTMLButtonAttributes & {
 		children: Snippet;
+		press?: boolean;
 	};
 
-	const { children, type = 'button', ...rest }: Props = $props();
+	const { press = true, children, type = 'button', ...rest }: Props = $props();
 </script>
 
-<button {...rest} {type} use:pressAction={'pressed'}>
+<button {...rest} {type} use:pressAction={press}>
 	{@render children()}
 </button>
 

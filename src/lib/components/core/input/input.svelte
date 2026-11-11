@@ -28,7 +28,7 @@
 		cursor: pointer;
 		border: 1px solid rgba(236, 94, 42, 0.5);
 		border-radius: 12px;
-		background-color: $white-main;
+		background-color: var(--white-main);
 		padding: 11px;
 		width: 100%;
 		height: 100%;

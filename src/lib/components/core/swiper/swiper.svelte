@@ -1,13 +1,16 @@
 <script lang="ts">
 	import IconSliderLeft from '#lib/icons/icon-slider-left.svelte';
 	import IconSliderRight from '#lib/icons/icon-slider-right.svelte';
-	import { onMount, type Snippet } from 'svelte';
+	import { appContext } from '#lib/stores/app.store.svelte.ts';
+	import type { Snippet } from 'svelte';
 
 	const { children, gap = 20 }: { children: Snippet; gap?: number } = $props();
 
 	let swiper: HTMLDivElement;
 	let currentIndex = $state(0);
 	let overSwiper = $state(false);
+
+	const appStore = appContext.get();
 
 	function scrollTo(index: number) {
 		const slide = swiper.querySelector<HTMLElement>(`:scope > [data-index="${index}"]`);
@@ -17,7 +20,9 @@
 		return true;
 	}
 
-	onMount(() => {
+	$effect(() => {
+		if (appStore.isMobile) return;
+
 		const interval = setInterval(() => {
 			if (overSwiper) return;
 
@@ -70,10 +75,28 @@
 				width: 100%;
 				height: 100%;
 				overflow: scroll;
+				scrollbar-width: none;
+				-ms-overflow-style: none;
+
+				&::-webkit-scrollbar {
+					display: none;
+				}
+
+				@include response-to-mobile {
+					overflow-x: scroll;
+					overflow-y: hidden;
+					scroll-snap-type: x mandatory;
+					-webkit-overflow-scrolling: touch;
+				}
 
 				> :global(*) {
 					flex-shrink: 0;
 					margin-right: var(--banner-gap);
+
+					@include response-to-mobile {
+						scroll-snap-align: start;
+						scroll-snap-stop: always;
+					}
 				}
 			}
 
@@ -98,6 +121,10 @@
 
 				> :global(span):last-of-type {
 					right: 1%;
+				}
+
+				@include response-to-mobile {
+					display: none;
 				}
 			}
 		}

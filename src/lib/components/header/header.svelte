@@ -12,22 +12,20 @@
 </script>
 
 <header>
-	<div class="header">
+	<div>
 		<div>
-			<div>
-				<div class="phone">
-					<IconPhone />
-					<h4>*7007</h4>
-				</div>
-				<div class="items">
-					{#each topMenu as item (item.id)}
-						<h4>{item.title}</h4>
-					{/each}
-					<h4>
-						<Translate key="branches" />
-					</h4>
-					<LanguageSwitcher />
-				</div>
+			<div class="phone">
+				<IconPhone />
+				<h4>*7007</h4>
+			</div>
+			<div class="items">
+				{#each topMenu as item (item.id)}
+					<h4>{item.title}</h4>
+				{/each}
+				<h4>
+					<Translate key="branches" />
+				</h4>
+				<LanguageSwitcher />
 			</div>
 		</div>
 	</div>
@@ -35,16 +33,16 @@
 
 <style lang="scss">
 	header {
-		height: $header-height;
-	}
-
-	.header {
 		position: relative;
 		z-index: 12;
 		margin-bottom: 0px;
-		background-color: $orange-main;
+		background-color: var(--orange-main);
 		padding: 10px 0px;
-		height: $header-height;
+		height: var(--header-height);
+
+		@include response-to-mobile {
+			display: none;
+		}
 
 		> div {
 			@include container;
@@ -62,7 +60,7 @@
 
 					h4 {
 						margin: 0px;
-						color: $white-main;
+						color: var(--white-main);
 						font-weight: 500;
 						font-size: 12px;
 						line-height: 14px;
@@ -79,7 +77,7 @@
 						transition: 0.21s;
 						cursor: pointer;
 						margin: 0px;
-						color: $white-main;
+						color: var(--white-main);
 						font-weight: 500;
 						font-size: 12px;
 						line-height: 14px;

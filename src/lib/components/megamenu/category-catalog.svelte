@@ -81,10 +81,10 @@
 			{/key}
 		</div>
 	</div>
+	<span class="menu-arrow">
+		<IconArrowDown />
+	</span>
 </div>
-<span class="menu-arrow">
-	<IconArrowDown />
-</span>
 
 <style lang="scss">
 	.categories-wrapper {
@@ -92,11 +92,16 @@
 		--default-height: 342px;
 		--transition-duration: 200ms;
 
+		display: none;
 		position: relative;
 		grid-column: 1;
 		transition: width var(--transition-duration) ease;
 		width: var(--menu-width, var(--category-width));
 		height: var(--default-height);
+
+		@include response-to-desktop {
+			display: initial;
+		}
 
 		.categories-container {
 			position: relative;
@@ -105,7 +110,7 @@
 				border-radius 0.3s ease;
 			box-shadow: rgba(0, 0, 0, 0.1) 0 2px 10px;
 			border-radius: 12px;
-			background: $white-main;
+			background: var(--white-main);
 			width: 100%;
 			height: var(--menu-height, var(--default-height));
 			min-height: var(--default-height);
@@ -116,14 +121,14 @@
 				top: 0;
 				left: 0;
 				z-index: 3;
-				background: $white-main;
+				background: var(--white-main);
 				width: var(--category-width);
 				overflow: hidden;
 
 				.categories-open {
 					position: relative;
 					box-shadow: rgba(0, 0, 0, 0.08) -1px 0 8px 1px;
-					background: $white-main;
+					background: var(--white-main);
 					width: 100%;
 					overflow: hidden;
 
@@ -151,7 +156,7 @@
 									h4 {
 										opacity: 0.8;
 										cursor: pointer;
-										color: $black-08;
+										color: var(--black-08);
 										font-weight: 500;
 										font-size: 12px;
 										line-height: 14px;
@@ -161,7 +166,7 @@
 								.sep {
 									margin-top: -1px;
 									margin-left: 10px;
-									background: $white-400;
+									background: var(--white-400);
 									width: calc(100% - 20px);
 									height: 1px;
 								}
@@ -178,7 +183,7 @@
 				z-index: 3;
 				box-shadow: rgba(0, 0, 0, 0.08) 4px 0 8px 1px;
 				border-radius: 8px;
-				background: $white-main;
+				background: var(--white-main);
 				width: calc(100% - var(--category-width));
 				height: 100%;
 				overflow: hidden;
@@ -218,7 +223,7 @@
 							h4 {
 								cursor: pointer;
 								margin-bottom: 15px;
-								color: $black-main;
+								color: var(--black-main);
 								font-weight: 500;
 								font-size: 16px;
 								line-height: 19px;
@@ -233,7 +238,7 @@
 							> a {
 								h4 {
 									cursor: pointer;
-									color: $black-08;
+									color: var(--black-08);
 									font-weight: 500;
 									font-size: 12px;
 									line-height: 14px;

@@ -87,7 +87,7 @@
 		z-index: 9999;
 		transition: width 0.1s ease-in-out;
 		border-radius: 9px;
-		background-color: $orange-main;
+		background-color: var(--orange-main);
 		width: 4px;
 		touch-action: none;
 		user-select: none;

@@ -1,17 +1,16 @@
-@use './variables' as *;
 @use './mixins' as *;
 
 header {
-	height: $header-total-height;
+	height: var(--header-total-height);
 }
 
 header > .header {
 	position: relative;
 	z-index: 12;
 	margin-bottom: 0;
-	background-color: $orange-main;
+	background-color: var(--orange-main);
 	padding: 10px 0;
-	height: $header-height;
+	height: var(--header-height);
 
 	> div {
 		@include container;
@@ -29,7 +28,7 @@ header > .header {
 
 				h4 {
 					margin: 0;
-					color: $white-main;
+					color: var(--white-main);
 					font-weight: 500;
 					font-size: 12px;
 					line-height: 14px;
@@ -46,7 +45,7 @@ header > .header {
 					transition: 0.21s;
 					cursor: pointer;
 					margin: 0;
-					color: $white-main;
+					color: var(--white-main);
 					font-weight: 500;
 					font-size: 12px;
 					line-height: 14px;
@@ -68,7 +67,7 @@ header > .header {
 	backdrop-filter: blur(10px);
 	background-color: rgba(237, 235, 235, 0.74);
 	width: auto;
-	height: $navbar-height;
+	height: var(--navbar-height);
 
 	> div {
 		@include container;
@@ -80,7 +79,11 @@ header > .header {
 			gap: 100px;
 			padding: 15px 0;
 			width: 100%;
-			height: $navbar-height;
+			height: var(--navbar-height);
+
+			@include response-to-mobile {
+				gap: 0;
+			}
 
 			a svg {
 				cursor: pointer;
@@ -93,7 +96,7 @@ header > .header {
 				gap: 20px;
 
 				h4 {
-					color: $white-main;
+					color: var(--white-main);
 					font-weight: 500;
 					font-size: 14px;
 					line-height: 17px;
@@ -104,10 +107,10 @@ header > .header {
 				}
 
 				.nav-button {
-					background-color: $orange-main;
+					background-color: var(--orange-main);
 					width: 130px;
 					height: 40px;
-					color: $white-main;
+					color: var(--white-main);
 				}
 			}
 
@@ -116,19 +119,19 @@ header > .header {
 				gap: 20px;
 
 				h4 {
-					color: $black-main;
+					color: var(--black-main);
 				}
 
 				.side-button {
 					opacity: 0.8;
-					background-color: $white-main;
+					background-color: var(--white-main);
 					width: 130px;
 				}
 
 				.discount {
-					background-color: $orange-main;
+					background-color: var(--orange-main);
 					width: 48px;
-					color: $white-main;
+					color: var(--white-main);
 				}
 			}
 		}
