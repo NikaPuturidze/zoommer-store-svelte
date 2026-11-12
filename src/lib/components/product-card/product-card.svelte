@@ -84,6 +84,11 @@
 		max-width: 160px;
 		height: 303px;
 
+		@include response-to-mobile {
+			max-width: 140px;
+			height: 283px;
+		}
+
 		> a {
 			border-radius: 8px;
 			background: white;
@@ -134,6 +139,10 @@
 					&.discounted {
 						color: var(--orange-main);
 					}
+
+					@include response-to-mobile {
+						font-size: 14px;
+					}
 				}
 
 				> span {
@@ -181,6 +190,11 @@
 				font-weight: 500;
 				font-size: 12px;
 				line-height: 18px;
+
+				@include response-to-mobile {
+					opacity: 1;
+					font-size: 10px;
+				}
 			}
 		}
 
@@ -227,6 +241,10 @@
 				font-weight: 600;
 				font-size: 12px;
 				line-height: 20px;
+
+				@include response-to-mobile {
+					font-size: 10px;
+				}
 			}
 		}
 	}

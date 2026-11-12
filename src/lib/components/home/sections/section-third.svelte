@@ -4,9 +4,11 @@
 	import type { Section } from '#lib/services';
 	import { localeContext } from '#lib/stores/locale.store.svelte.ts';
 	import { resolve } from '$app/paths';
+	import { appContext } from '#lib/stores/app.store.svelte.ts';
 
 	const { section }: { section: Section } = $props();
 	const { getUrl } = localeContext.get();
+	const appStore = appContext.get();
 	const isGrid = $derived(
 		!section.isScroll && section.bannerTemplateRowNumber > 0 && (section.banners?.length ?? 0) > 1
 	);
@@ -21,11 +23,20 @@
 			<a href={resolve(getUrl(banner.route))}>
 				<img
 					alt={banner.title}
-					height={banner.webDimensions?.heightInPixels}
-					{...optimizedImage(banner.webImageUrl, banner.webDimensions?.widthInPixels ?? 1200)}
+					height={appStore.isMobile
+						? banner.mobileDimensions?.heightInPixels
+						: banner.webDimensions?.heightInPixels}
+					{...optimizedImage(
+						banner.webImageUrl,
+						(appStore.isMobile
+							? banner.mobileDimensions?.widthInPixels
+							: banner.webDimensions?.widthInPixels) ?? 1200
+					)}
 					decoding="async"
 					loading="lazy"
-					width={banner.webDimensions?.widthInPixels}
+					width={appStore.isMobile
+						? banner.mobileDimensions?.widthInPixels
+						: banner.webDimensions?.widthInPixels}
 				/>
 			</a>
 		</div>
@@ -39,7 +50,7 @@
 	{#if !section.isScroll}
 		{@render banners()}
 	{:else}
-		<Swiper auto={false} gap={35} navigation={!!section.isScroll}>
+		<Swiper auto={false} gap={appStore.isMobile ? 20 : 35} navigation={!!section.isScroll}>
 			{@render banners()}
 		</Swiper>
 	{/if}
@@ -47,7 +58,7 @@
 
 <style lang="scss">
 	.wrapper-three {
-		border-radius: 13px;
+		border-radius: 12px;
 		background-color: var(--section-background);
 		padding: 25px 0px 25px 25px;
 		width: 100%;
@@ -69,6 +80,15 @@
 			border-radius: 14px;
 			background-color: rgb(255, 209, 245);
 			padding: 25px 28px;
+
+			@include response-to-mobile {
+				gap: 12px;
+			}
+
+			@include response-to-mobile-small {
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+				padding: 18px;
+			}
 
 			.banner-three {
 				min-width: 0;

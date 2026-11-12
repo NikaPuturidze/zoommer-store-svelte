@@ -4,9 +4,11 @@
 	import type { Section } from '#lib/services';
 	import { localeContext } from '#lib/stores/locale.store.svelte.ts';
 	import { resolve } from '$app/paths';
+	import { appContext } from '#lib/stores/app.store.svelte.ts';
 
 	const { section }: { section: Section } = $props();
 	const { getUrl } = localeContext.get();
+	const appStore = appContext.get();
 </script>
 
 <div class="wrapper-fourth">
@@ -15,7 +17,7 @@
 			<h2>{section.title}</h2>
 		</a>
 	</div>
-	<Swiper auto={false} gap={35}>
+	<Swiper auto={false} gap={appStore.isMobile ? 20 : 35}>
 		{#each section.brands as brand, index (index)}
 			<div class="banner-fourth" data-index={index}>
 				<a href={resolve(getUrl(brand.route))}>
@@ -43,6 +45,10 @@
 			margin-bottom: 30px;
 			width: 100%;
 
+			@include response-to-mobile {
+				margin-bottom: 10px;
+			}
+
 			h2 {
 				opacity: 0.8;
 				color: var(--black-main);
@@ -61,11 +67,21 @@
 				height: 80px;
 				overflow: hidden;
 
+				@include response-to-mobile {
+					width: 120px;
+					height: 60px;
+				}
+
 				img {
 					cursor: pointer;
 					width: 160px;
 					height: 80px;
 					object-fit: cover;
+
+					@include response-to-mobile {
+						width: inherit;
+						height: inherit;
+					}
 				}
 			}
 		}

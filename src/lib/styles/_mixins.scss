@@ -38,6 +38,12 @@
 	}
 }
 
+@mixin response-to-mobile-small {
+	@media (max-width: 767px) {
+		@content;
+	}
+}
+
 @mixin response-to-desktop {
 	@media (min-width: 1024px) {
 		@content;

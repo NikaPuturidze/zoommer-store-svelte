@@ -32,7 +32,6 @@
 	.sections-wrapper {
 		display: flex;
 		flex-direction: column;
-		gap: 60px;
 		margin-top: 40px;
 
 		.sections {
@@ -42,6 +41,15 @@
 			gap: 60px;
 			margin-top: 30px;
 			width: 100%;
+
+			@include response-to-mobile {
+				gap: 30px;
+				margin-top: 13px;
+			}
+
+			@include response-to-mobile {
+				margin-top: 10px;
+			}
 		}
 	}
 </style>
