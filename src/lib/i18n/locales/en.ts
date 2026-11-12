@@ -6,5 +6,6 @@ export const en = {
 	log_in: 'Log In',
 	per_month: 'Per month {amount}',
 	in_cart: 'In Cart',
-	add: 'Add'
+	add: 'Add',
+	all_categories: 'All Categories'
 } as const;

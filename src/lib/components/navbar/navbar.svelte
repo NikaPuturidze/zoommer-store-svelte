@@ -11,9 +11,10 @@
 	import Translate from '../translate.svelte';
 	import { appContext } from '#lib/stores/app.store.svelte.ts';
 	import LanguageSwitcher from '../header/language-switcher.svelte';
+	import { goto } from '$app/navigation';
 
 	let search = $state('');
-	const { t } = localeContext.get();
+	const { getUrl, t } = localeContext.get();
 	const appStore = appContext.get();
 </script>
 
@@ -27,7 +28,7 @@
 
 				<div class="desktop">
 					<div class="items">
-						<Button class="nav-button">
+						<Button class="nav-button" onclick={() => goto(resolve(getUrl('all-categories')))}>
 							<IconDots />
 							<h4><Translate key="navigation" /></h4>
 						</Button>

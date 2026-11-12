@@ -6,5 +6,6 @@ export const ka = {
 	log_in: 'შესვლა',
 	per_month: 'თვეში: {amount} -დან',
 	in_cart: 'კალათაშია',
-	add: 'დამატება'
+	add: 'დამატება',
+	all_categories: 'ყველა კატეგორია'
 } as const;
